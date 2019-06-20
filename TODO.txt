@@ -1,0 +1,8 @@
+TO-DO:
+
+* Figure out what logs to collect
+* Remove reliance on AppleScript for gathering login items in persist.py
+* Add default browser setting
+* Collect browser settings files
+* Fix profile collection on older systems
+* Fix launchctl list only collecting root-owned items

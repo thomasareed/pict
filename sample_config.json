@@ -1,0 +1,41 @@
+{
+	"collection_dest" : "~/Desktop/",
+	"all_users" : true,
+	
+	"collectors" : {
+		"fileinfo" : "FileInfoCollector",
+		"persist" : "PersistenceCollector",
+		"suspicious" : "SuspiciousBehaviorCollector",
+		"browser" : "BrowserExtCollector",
+		"browserhist" : "BrowserHistoryCollector",
+		"bash_config" : "BashConfigCollector",
+		"bash_hist" : "BashHistoryCollector",
+		"processes" : "ProcessCollector",
+		"network_config" : "NetworkConfigCollector",
+		"profiles" : "ProfileCollector",
+		"certs" : "TrustedCertCollector",
+		"installs" : "InstallationCollector"
+	},
+	
+	"settings" : {
+		"keepLSData" : true,
+		"zipIt" : true
+	},
+	
+	"moduleSettings" : {
+		"browser" : {
+			"collectArtifacts" : true
+		},
+		"fileinfo" : {
+			"paths" : [
+				{
+					"path" : "/",
+					"ignoreRestricted" : true
+				}
+			]
+		}
+	},
+	
+	"unused" : {
+	}
+}
