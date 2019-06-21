@@ -5,4 +5,3 @@ TO-DO:
 * Add default browser setting
 * Collect browser settings files
 * Fix profile collection on older systems
-* Fix launchctl list only collecting root-owned items

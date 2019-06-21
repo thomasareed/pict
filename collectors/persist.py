@@ -171,7 +171,19 @@ class PersistenceCollector(Collector):
 		
 		
 	def collectLaunchctlList(self):
-		return os.popen("launchctl list").read().rstrip()
+		whoami = os.popen("whoami").read().rstrip()
+		if whoami == "root":
+			output = "Root agents/daemons:\n"
+			output += os.popen("launchctl list").read().rstrip() + "\n\n"
+			
+			user = os.popen("logname").read().rstrip()
+			output += "User agents:\n"
+			output += os.popen('su {0} -c "launchctl list"'.format(user)).read().rstrip()
+		else:
+			output += "User agents:\n"
+			output += os.popen("launchctl list").read().rstrip()
+			
+		return output
 		
 	
 	# Adds items to pathsToCollect, to mark them for collection
