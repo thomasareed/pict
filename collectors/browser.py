@@ -89,17 +89,32 @@ class BrowserExtCollector(Collector):
 	
 	def collectChrome(self):
 		output = ""
-		extensionsForUsers = self.getChromeExtensionList()
+		
+		profilesForUsers = {}
+		for user in self.userList:
+			profilesForUsers[user] = util.getChromeProfilesForUser(user)
+		
+		for user in profilesForUsers:
+			profileList = profilesForUsers[user]
+			for profile in profileList:
+				profilePath = profileList[profile]
+				self.pathsToCollect.append(util.safePathJoin(profilePath, "Preferences"))
+				self.pathsToCollect.append(util.safePathJoin(profilePath, "Secure Preferences"))
+		
+		extensionsForUsers = self.getChromeExtensionList(profilesForUsers)
 
 		for user in extensionsForUsers:
 			output += "Extensions for {0}:\n".format(user)
 			extensionsForProfiles = extensionsForUsers[user]
-		
+			
 			# Iterate over all profiles
 			for profile in extensionsForProfiles:
 				output += "  Profile {0}:\n".format(profile)
 				extensionList = extensionsForProfiles[profile]
-
+				
+				# Collect Preferences and Secure Preferences for each profile
+				# self.pathsToCollect.append(???)
+				
 				# Iterate extensions for profile
 				for extPath in extensionList:
 					if not os.path.isdir(extPath):
@@ -149,7 +164,18 @@ class BrowserExtCollector(Collector):
 	
 	def collectFirefox(self):
 		output = ""
-		extensionsForUsers = self.getFirefoxExtensionList()
+		
+		profilesForUsers = {}
+		for user in self.userList:
+			profilesForUsers[user] = util.getFirefoxProfilesForUser(user)
+		
+		for user in profilesForUsers:
+			profileList = profilesForUsers[user]
+			for profile in profileList:
+				profilePath = profileList[profile]
+				self.pathsToCollect.append(util.safePathJoin(profilePath, "prefs.js"))
+		
+		extensionsForUsers = self.getFirefoxExtensionList(profilesForUsers)
 
 		for user in extensionsForUsers:
 			output += "Extensions for {0}:\n".format(user)
@@ -226,13 +252,15 @@ class BrowserExtCollector(Collector):
 		return extensionsDict
 			
 		
-	def getChromeExtensionList(self):
+	def getChromeExtensionList(self, profilesForUsers):
+		if profilesForUsers == {}:
+			return {}
+		
 		extensionsDict = {}
 
-		for user in self.userList:
+		for user in profilesForUsers:
+			profileList = profilesForUsers[user]
 			extensionsForUser = {}
-	
-			profileList = util.getChromeProfilesForUser(user)
 	
 			# Iterate over all profiles
 			for profile in profileList:
@@ -273,10 +301,14 @@ class BrowserExtCollector(Collector):
 		return extensionsDict
 		
 		
-	def getFirefoxExtensionList(self):
+	def getFirefoxExtensionList(self, profilesForUsers):
+		if profilesForUsers == {}:
+			return {}
+		
 		extensionsDict = {}
 
-		for user in self.userList:
+		for user in profilesForUsers:
+			profileList = profilesForUsers[user]
 			extensionsForUser = {}
 
 			profileList = util.getFirefoxProfilesForUser(user)
