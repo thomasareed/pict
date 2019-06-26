@@ -2,6 +2,8 @@ TO-DO:
 
 * Figure out what logs to collect
 * Remove reliance on AppleScript for gathering login items in persist.py
-* Add default browser setting
-* Collect browser settings files
+* Collect default browser setting
 * Fix profile collection on older systems
+* Add optional collection of "where from" metadata for .dmg, .pkg, .zip files during file system traversal
+* Add optional collection of code signature information for apps (all mach-o binaries?) during file system traversal
+* Add optional collection of hashes during file system traversal

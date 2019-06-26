@@ -133,7 +133,34 @@ class SuspiciousBehaviorCollector(Collector):
 			for oneLine in suspiciousLines:
 				f.write(oneLine.rstrip() + "\n")
 			f.write("\n")
-				
+		
+		# Identify suspicious entries in the hosts file
+		hostsFile = open("/etc/hosts", "r")
+		hostsData = hostsFile.read()
+		hostsFile.close
+		suspiciousLines = re.findall("^[\d\.]+\s+.*apple\.com", hostsData, re.MULTILINE)
+		if suspiciousLines:
+			f.write("Blocking apple.com, possible infection!\n-----------------------------\n")
+			for oneLine in suspiciousLines:
+				f.write(oneLine.rstrip() + "\n")
+		suspiciousLines = re.findall("^[\d\.]+\s+.*virustotal\.com", hostsData, re.MULTILINE)
+		if suspiciousLines:
+			f.write("Blocking virustotal.com, possible infection!\n-----------------------------\n")
+			for oneLine in suspiciousLines:
+				f.write(oneLine.rstrip() + "\n")
+		suspiciousLines = re.findall("^[\d\.]+\s+.*malwarebytes\.com", hostsData, re.MULTILINE)
+		if suspiciousLines:
+			f.write("Blocking malwarebytes.com, possible infection!\n-----------------------------\n")
+			for oneLine in suspiciousLines:
+				f.write(oneLine.rstrip() + "\n")
+		
+		suspiciousLines = re.findall("^[\d\.]+\s+.*adobe\.com", hostsData, re.MULTILINE)
+		if suspiciousLines:
+			f.write("Blocking adobe.com, piracy\n-----------------------------\n")
+			for oneLine in suspiciousLines:
+				f.write(oneLine.rstrip() + "\n")
+		
+		
 		f.close
 		
 		# Add any paths to self.pathsToCollect

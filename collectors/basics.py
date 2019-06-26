@@ -45,9 +45,6 @@ class BasicsCollector(Collector):
 		# Concerning things...
 		if os.path.exists("/private/etc/kcpassword"):
 			f.write("WARNING! Automatic login is enabled by user!\n")
-		result = os.system("egrep -i '127\.0\.0\.1\s*.*activate.*\.adobe\.com' /Users/thomas/Desktop/hosts &>/dev/null")
-		if result == 0:
-			f.write("WARNING! Hosts file shows signs of piracy activity!\n")		
 		
 		# System profiler stuff
 		f.write("\n")
@@ -60,7 +57,7 @@ class BasicsCollector(Collector):
 		
 		# Users
 		f.write("User list\n-----------------------------\n")
-		users = os.popen("dscl . list /Users | grep -v '_'").read().rstrip()
+		users = os.popen("dscl . list /Users | grep -v '^_'").read().rstrip()
 		userlist = users.split("\n")
 		for user in userlist:
 			if user != "daemon" and user != "nobody":
