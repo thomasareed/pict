@@ -1,6 +1,11 @@
 # PICT - Post-Infection Collection Toolkit
 ## Version history
 
+### June 27, 2019
+
+* Added support for log collection
+	* Collects system logs, ASL logs, and unified logs. See comments in the logs.py module for details.
+
 ### June 26, 2019
 
 * Improved processing of the hosts file

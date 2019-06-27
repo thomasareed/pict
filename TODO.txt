@@ -1,6 +1,5 @@
 TO-DO:
 
-* Figure out what logs to collect
 * Remove reliance on AppleScript for gathering login items in persist.py
 * Collect default browser setting
 * Fix profile collection on older systems

@@ -14,7 +14,8 @@
 		"network_config" : "NetworkConfigCollector",
 		"profiles" : "ProfileCollector",
 		"certs" : "TrustedCertCollector",
-		"installs" : "InstallationCollector"
+		"installs" : "InstallationCollector",
+		"logs" : "LogCollector"
 	},
 	
 	"settings" : {
@@ -33,6 +34,9 @@
 					"ignoreRestricted" : true
 				}
 			]
+		},
+		"logs" : {
+			"logArguments" : "--last 12h"
 		}
 	},
 	
