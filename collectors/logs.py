@@ -23,6 +23,14 @@
 
 #   log collect --last 12h --output /path/to/collection/folder/
 
+# Collection of OpenBSD audit logs is optional, and is turned off by default, due to the potential size of those logs. To enable collection, include an entry in the log module settings like this:
+
+# 	"moduleSettings" : {
+# 		"logs" : {
+# 			"collectAuditLogs" : true
+# 		}
+# 	}
+
 
 import os, subprocess
 import glob
@@ -32,13 +40,17 @@ import tools.util as util
 class LogCollector(Collector):
 	
 	unifiedLogArguments = ""
+	collectAuditLogs = False
 
 	def printStartInfo(self):
 		print "Collecting log data"
 	
 	def applySettings(self, settingsDict):
-		if "logArguments" in settingsDict:
-			self.unifiedLogArguments = settingsDict["logArguments"]
+		if "unifiedLogArguments" in settingsDict:
+			self.unifiedLogArguments = settingsDict["unifiedLogArguments"]
+		
+		if "collectAuditLogs" in settingsDict:
+			self.collectAuditLogs = settingsDict["collectAuditLogs"]
 		
 		Collector.applySettings(self, settingsDict)
 	
@@ -58,5 +70,7 @@ class LogCollector(Collector):
 		if len(systemLogPaths) > 0:
 			self.pathsToCollect = self.pathsToCollect + systemLogPaths
 		self.pathsToCollect.append("/var/log/asl/")
+		if self.collectAuditLogs:
+			self.pathsToCollect.append("/var/audit/")
 		
 		Collector.collect(self)

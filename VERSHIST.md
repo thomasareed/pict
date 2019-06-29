@@ -1,6 +1,12 @@
 # PICT - Post-Infection Collection Toolkit
 ## Version history
 
+### June 29, 2019, part 2
+
+* Added collection of more data
+	* OpenBSM audit log artifacts (which can be viewed with praudit)
+	* en0 and en1 config information (so you have a record of the collected machine's IP address!)
+
 ### June 29, 2019
 
 * Fixed issue with creation dates collected by fileinfo.py

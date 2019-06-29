@@ -20,6 +20,15 @@ class NetworkConfigCollector(Collector):
 		filePath = self.collectionPath + filename
 		f = open(filePath, "w+")
 		
+		f.write("en0\n-----------------------------\n")
+		oputput = os.popen("ifconfig en0").read().rstrip()
+		f.write(output + "\n\n")
+		
+		f.write("en1\n-----------------------------\n")
+		oputput = os.popen("ifconfig en1").read().rstrip()
+		f.write(output + "\n\n")
+		
+		# Output will already have a "DNS configuration" heading, no need to add one
 		output = os.popen("scutil --dns 2>&1").read().rstrip()
 		f.write(output + "\n\n")
 				

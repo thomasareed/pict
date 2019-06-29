@@ -36,7 +36,8 @@
 			]
 		},
 		"logs" : {
-			"logArguments" : "--last 12h"
+			"unifiedLogArguments" : "--last 12h",
+			"collectAuditLogs" : true
 		}
 	},
 	
