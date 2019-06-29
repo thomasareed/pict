@@ -1,6 +1,11 @@
 # PICT - Post-Infection Collection Toolkit
 ## Version history
 
+### June 29, 2019
+
+* Fixed issue with creation dates collected by fileinfo.py
+	* It turns out os.stat().st_ctime cannot be relied on to give the correct creation time on macOS. Instead, os.stat().st_birthtime must be used.
+
 ### June 27, 2019
 
 * Added support for log collection

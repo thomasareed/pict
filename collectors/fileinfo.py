@@ -145,7 +145,7 @@ class FileInfoCollector(Collector):
 		mode = oct(self.statinfo.st_mode)
 	
 		# Get created, modified, accessed times
-		cTime = TimestampToGMTStr(self.statinfo.st_ctime)
+		cTime = TimestampToGMTStr(self.statinfo.st_birthtime)
 		mTime = TimestampToGMTStr(self.statinfo.st_mtime)
 		aTime = TimestampToGMTStr(self.statinfo.st_atime)
 		
