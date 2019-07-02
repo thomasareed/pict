@@ -174,6 +174,7 @@ class BrowserExtCollector(Collector):
 			for profile in profileList:
 				profilePath = profileList[profile]
 				self.pathsToCollect.append(util.safePathJoin(profilePath, "prefs.js"))
+				self.pathsToCollect.append(util.safePathJoin(profilePath, "extensions.js"))
 		
 		extensionsForUsers = self.getFirefoxExtensionList(profilesForUsers)
 

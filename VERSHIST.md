@@ -1,6 +1,10 @@
 # PICT - Post-Infection Collection Toolkit
 ## Version history
 
+### July 2, 2019
+
+* Added collection of extensions.json from Firefox profiles
+
 ### June 29, 2019, part 2
 
 * Added collection of more data
