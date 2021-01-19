@@ -63,8 +63,12 @@ class SuspiciousBehaviorCollector(Collector):
 				continue
 			
 			# Read the plist data into a dictionary
-			plistDict = FoundationPlist.readPlist(onePath)
-			if not plistDict:
+			try:
+				plistDict = FoundationPlist.readPlist(onePath)
+				if not plistDict:
+					print "Error interpreting contents of {0}".format(onePath)
+					continue
+			except FoundationPlist.NSPropertyListSerializationException:
 				print "Error interpreting contents of {0}".format(onePath)
 				continue
 			
