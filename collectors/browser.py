@@ -154,7 +154,7 @@ class BrowserExtCollector(Collector):
 					#end if extName.startswith("__MSG_")
 			
 					output += "    Extension: {0}\n".format(extPath)
-					output += "    Name: {0}\n\n".format(extName)
+					output += "    Name: {0}\n\n".format(extName.encode('utf-8'))
 				#end for extension
 			#end for profile
 		#end for user
